@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { PointerLockControls } from "./vendor/PointerLockControls.js";
 import { BOARDS } from "./boards.js";
+import { createHud } from "./hud.js";
 
 // ---------------------------------------------------------------- setup
 const app = document.getElementById("app");
@@ -402,6 +403,8 @@ const CENTRE = {
 };
 
 buildRooms();
+const hud = createHud({ scene, camera, boards: BOARDS, texLoader, makeLabel: label });
+window.__hudSnap = () => hud.snap();
 
 // ---------------------------------------------------------------- walking
 const controls = new PointerLockControls(camera, renderer.domElement);
@@ -420,6 +423,7 @@ controls.addEventListener("unlock", () => { if (detail.classList.contains("hidde
 const keys = {};
 addEventListener("keydown", e => {
   keys[e.code] = true;
+  if (e.code === "KeyH") hud.toggle(clock.elapsedTime);
   if (e.code === "Digit0") goto("rotunda");
   if (e.code === "Digit1") goto("a");
   if (e.code === "Digit2") goto("b");
@@ -429,6 +433,7 @@ addEventListener("keydown", e => {
 addEventListener("keyup", e => keys[e.code] = false);
 
 function goto(k) {
+  setTimeout(() => window.__hudSnap && window.__hudSnap(), 0);
   if (k === "rotunda") { camera.position.set(0, EYE, 2.5); camera.lookAt(ROOMS[1].u.x * 5, EYE, ROOMS[1].u.z * 5); return; }
   const r = ROOMS.find(r => r.key === k);
   const p = r.u.clone().multiplyScalar(R + PASS + 1.5);
@@ -446,6 +451,12 @@ function walkable(x, z) {
     if (lx < 0 && Math.abs(d) < A_AX * 0.2 * 0 + 1.1 && (lx / (A_AX * 0.99)) ** 2 + (d / B_AX) ** 2 < 1) return true;
   }
   return false;
+}
+function roomKeyAt(x, z) {
+  if (Math.hypot(x, z) < R + 1.5) return null;
+  let best = null, bd = 1e9;
+  ROOMS.forEach(r => { const d = Math.hypot(x - r.centre.x, z - r.centre.z); if (d < bd) { bd = d; best = r; } });
+  return bd < A_AX + 1 ? best.key : null;
 }
 function roomAt(x, z) {
   if (Math.hypot(x, z) < R + 0.5) return "ROTUNDA";
@@ -495,6 +506,9 @@ function frame() {
   }
   if (embed) embedCamera(embed, t);
   animators.forEach(f => f(dt, t));
+  const hudOff = embed || params.get("hud") === "0";
+  hud.setRoom(hudOff ? null : roomKeyAt(camera.position.x, camera.position.z), t);
+  hud.update(dt, t, controls.isLocked && (keys.KeyW || keys.KeyS || keys.KeyA || keys.KeyD));
   where.textContent = roomAt(camera.position.x, camera.position.z);
   renderer.render(scene, camera);
   requestAnimationFrame(frame);
@@ -502,6 +516,7 @@ function frame() {
 addEventListener("resize", () => {
   camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix();
   renderer.setSize(innerWidth, innerHeight);
+  hud.rebuild();
 });
 // Embedded in a board: a slow, framed camera move per room
 const _p = new THREE.Vector3(), _l = new THREE.Vector3();

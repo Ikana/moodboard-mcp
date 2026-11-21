@@ -55,6 +55,7 @@ Start from [template/](template/). It is three directions keyed `a`, `b` and `c`
    - `/collage.html?k=a`: one mockup full screen.
    - `/rooms/`: a walkable Orangerie-style rotunda, with doorways into three oval auditoria.
    - `/rooms/?embed=a`: the framed camera move used inside a mockup.
+   - Inside a room, `rooms/hud.js` floats that board's collage round the view as a holographic visor that trails the camera within a clamped lag (H toggles it, `?hud=0` turns it off).
 5. Screenshot each page, look at it, fix it, then open it in the person's browser.
 
 [template/flat/](template/flat/) holds the 2D version of a direction page, which is quicker to iterate in the critic loop before moving to 3D.
