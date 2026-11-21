@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Three Directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@300;500&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #050505; --panel: #2a2a2a; --fg: #ece8df; --muted: #9a958b; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { height: 100%; background: var(--bg); color: var(--fg); font-family: "IBM Plex Mono", monospace; }
+  body { overflow: hidden; display: flex; flex-direction: column; }
+  header {
+    text-align: center; padding: 18px 16px 14px;
+    font: 300 22px/1.3 "IBM Plex Sans Condensed", sans-serif; color: var(--muted);
+  }
+  header b { color: var(--fg); font-weight: 500; }
+  .row {
+    flex: 1; min-height: 0;
+    display: flex; gap: 2.2vw; align-items: center; justify-content: center;
+    padding: 0 2.2vw 2.2vw;
+  }
+  .board {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    width: min(31vw, (100vh - 90px) * 4 / 3);
+    background: var(--panel);
+    padding: 1.1%;
+    display: grid;
+    grid-template-columns: 1.15fr 3.3fr 1.15fr;
+    grid-template-rows: 1fr 3fr 1fr;
+    gap: 0.9%;
+    text-decoration: none; color: inherit;
+    container-type: inline-size;
+  }
+  body.single .row { padding: 0 16px 16px; }
+  body.single .board { width: min(100vw - 32px, (100vh - 80px) * 4 / 3); }
+  .strip { display: flex; gap: 4px; min-width: 0; min-height: 0; }
+  .top { grid-column: 1 / 4; grid-row: 1; }
+  .bottom { grid-column: 1 / 4; grid-row: 3; }
+  .left { grid-column: 1; grid-row: 2; flex-direction: column; }
+  .right { grid-column: 3; grid-row: 2; flex-direction: column; }
+  .tile { position: relative; overflow: hidden; min-width: 0; min-height: 0; background: #1c1c1c; }
+  .tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .tile .n {
+    position: absolute; left: 3px; top: 3px;
+    font: 500 max(7px, .85cqw)/1 "IBM Plex Mono", monospace;
+    background: #050505; color: var(--fg); padding: 2px 3px;
+  }
+  .tile.text {
+    background: transparent; border: 1px solid #444;
+    padding: 6%; display: flex; flex-direction: column; justify-content: space-between;
+    font-size: max(6px, .85cqw); line-height: 1.5; color: var(--muted);
+  }
+  .tile.text strong { font: 300 max(10px, 1.9cqw)/1.05 "IBM Plex Sans Condensed", sans-serif; color: var(--fg); }
+  .tile.text .k { color: var(--fg); }
+
+  .stage { grid-column: 2; grid-row: 2; position: relative; overflow: hidden; background: #111; }
+  .stage iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; pointer-events: none; }
+  .stage .title {
+    position: absolute; left: 0; bottom: 0; right: 0;
+    padding: 8% 4% 4%;
+    pointer-events: none;
+    background: linear-gradient(transparent, rgba(8,8,8,.82) 55%);
+  }
+  .stage.light .title { background: linear-gradient(transparent, rgba(236,232,223,.9) 55%); }
+  .stage .kicker { font: 500 max(6px, .8cqw)/1 "IBM Plex Mono", monospace; letter-spacing: .2em; color: var(--fg); opacity: .8; }
+  .stage h2 { font: 300 max(13px, 3.3cqw)/1 "IBM Plex Sans Condensed", sans-serif; margin-top: .35em; }
+  .stage p { font: 300 max(8px, 1.15cqw)/1.35 "IBM Plex Sans Condensed", sans-serif; color: #d6d1c6; max-width: 52ch; margin-top: .5em; }
+  .stage.light .title { color: #16171b; text-shadow: none; }
+  .stage.light .kicker { color: #16171b; }
+  .stage.light p { color: #3c3a35; }
+  .board:hover { outline: 1px solid #555; }
+  .back { position: fixed; left: 16px; top: 16px; font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: .1em; }
+  @media (max-width: 760px) {
+    body { overflow: auto; }
+    .row { flex-direction: column; padding: 0 16px 16px; }
+    .board, body.single .board { width: 100%; }
+  }
+</style>
+</head>
+<body>
+<header id="hdr">Three directions for showing the creative process. <b>Pick the one to head in together.</b></header>
+<div class="row" id="row"></div>
+<script src="sizes.js"></script>
+<script type="module">
+import { BOARDS } from "./rooms/boards.js";
+
+const params = new URLSearchParams(location.search);
+const only = params.get("k");
+const row = document.getElementById("row");
+if (only) {
+  document.body.classList.add("single");
+  document.getElementById("hdr").innerHTML = `${BOARDS[only].key} · ${BOARDS[only].title.split(", ")[1]} <a href="collage.html" style="color:#9a958b;margin-left:12px;font-size:14px">all three</a>`;
+}
+
+const KEYWORDS = {
+  a: "<span class='k'>3</span> Inspiring<br><span class='k'>6</span> Engineering inspired<br><span class='k'>9</span> Rich",
+  b: "<span class='k'>2</span> Awe<br><span class='k'>5</span> Clear typography<br><span class='k'>7</span> Harmonious colours",
+  c: "<span class='k'>1</span> Flow<br><span class='k'>4</span> Simple OR complex<br><span class='k'>8</span> Blues &amp; red/orange",
+};
+
+for (const k of only ? [only] : ["a", "b", "c"]) {
+  const B = BOARDS[k];
+  const linkOf = {};
+  B.stations.forEach(s => linkOf[s.img] = s.n);
+  const board = document.createElement(only ? "div" : "a");
+  board.className = "board";
+  if (!only) board.href = `collage.html?k=${k}`;
+  const strips = {};
+  for (const s of ["top", "left", "right", "bottom"]) {
+    strips[s] = document.createElement("div");
+    strips[s].className = "strip " + s;
+    strips[s].load = 0;
+    board.appendChild(strips[s]);
+  }
+
+  // Wide pictures go to the rows, tall ones to the columns, balancing each strip.
+  const imgs = B.images.map(im => ({ ...im, ar: ASPECT[im.f] || 1 })).sort((a, b) => b.ar - a.ar);
+  const ROW_CAP = 6.4, COL_CAP = 2.3;
+  const place = (s, im) => {
+    const t = document.createElement("div");
+    t.className = "tile";
+    t.title = im.t;
+    t.style.flex = s === "top" || s === "bottom" ? `${im.ar} 1 0` : `${1 / im.ar} 1 0`;
+    t.innerHTML = `<img src="img/${im.f}" alt="${im.t}" loading="lazy">` + (linkOf[im.id] ? `<span class="n">${String(linkOf[im.id]).padStart(2, "0")}</span>` : "");
+    strips[s].appendChild(t);
+    strips[s].load += s === "top" || s === "bottom" ? im.ar / ROW_CAP : (1 / im.ar) / COL_CAP;
+  };
+  // text tile first in the left column
+  const tx = document.createElement("div");
+  tx.className = "tile text";
+  tx.style.flex = "0.55 1 0";
+  tx.innerHTML = `<strong>${B.key} · ${B.title.split(", ")[1]}</strong><span>${KEYWORDS[k]}</span>`;
+  strips.left.appendChild(tx);
+  strips.left.load = 0.55 / COL_CAP;
+  imgs.forEach(im => {
+    const order = im.ar >= 1.1 ? ["top", "bottom", "left", "right"] : ["left", "right", "top", "bottom"];
+    const s = order.slice().sort((a, b) => strips[a].load - strips[b].load || order.indexOf(a) - order.indexOf(b))
+      .find(s => strips[s].load < 1) || order[0];
+    // prefer the preferred kind of strip while it has room
+    const pref = order.slice(0, 2).sort((a, b) => strips[a].load - strips[b].load)[0];
+    place(strips[pref].load < 1 ? pref : s, im);
+  });
+
+  const stage = document.createElement("div");
+  stage.className = "stage" + (k === "b" ? " light" : "");
+  stage.innerHTML = `
+    <iframe src="rooms/index.html?embed=${k}" title="${B.title} centre piece" loading="lazy"></iframe>
+    <div class="title">
+      <div class="kicker">FIG. ${B.key} — THE CREATIVE PROCESS</div>
+      <h2>${B.headline}</h2>
+      <p>${B.caption}</p>
+    </div>`;
+  board.appendChild(stage);
+  row.appendChild(board);
+}
+</script>
+</body>
+</html>

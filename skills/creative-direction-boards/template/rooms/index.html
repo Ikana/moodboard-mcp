@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Process Rotunda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@300;500&display=swap" rel="stylesheet">
+<style>
+  :root { --ink: #16171b; --paper: #efebe2; --muted: #7d786e; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #d9d3c6; color: var(--ink);
+    font-family: "IBM Plex Mono", monospace; }
+  #app canvas { display: block; }
+  .hidden { display: none !important; }
+  #overlay { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(239,235,226,.78);
+    backdrop-filter: blur(6px); cursor: pointer; padding: 16px; }
+  #overlay .card { max-width: 560px; }
+  #overlay h1 { font: 300 46px/1 "IBM Plex Sans Condensed", sans-serif; margin: 0 0 14px; }
+  #overlay p { font-size: 13px; line-height: 1.7; margin: 0 0 12px; color: #333; }
+  #overlay kbd { font: 500 11px "IBM Plex Mono", monospace; padding: 1px 6px; border: 1px solid #b9b2a4; background: #fbf9f4; }
+  #overlay .go { margin-top: 20px; font-weight: 500; }
+  #crosshair { position: fixed; left: 50%; top: 50%; width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; border-radius: 50%;
+    background: rgba(20,20,20,.6); box-shadow: 0 0 0 2px rgba(255,255,255,.6); pointer-events: none; }
+  #where { position: fixed; top: 16px; left: 16px; font: 500 11px "IBM Plex Mono", monospace; letter-spacing: .14em;
+    background: rgba(239,235,226,.85); padding: 6px 10px; pointer-events: none; }
+  #detail { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(12,13,16,.7); padding: 16px; }
+  #detail figure { margin: 0; max-width: min(900px, 100%); }
+  #detail img { max-width: 100%; max-height: 78vh; display: block; }
+  #detail figcaption { color: #e9e4d8; font-size: 12px; margin-top: 10px; letter-spacing: .04em; }
+</style>
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.js" } }</script>
+</head>
+<body>
+<div id="app"></div>
+<div id="crosshair"></div>
+<div id="where">ROTUNDA</div>
+<div id="overlay" class="hidden">
+  <div class="card">
+    <h1>The process rotunda</h1>
+    <p>A small round room, like the Orangerie's rotonde, with three doorways. Each opens onto an oval auditorium for one column of the moodboard: <b>A · Engineering</b>, <b>B · Clarity</b> and <b>C · Flow</b>. Its idea of the creative process stands in the middle, and its board hangs round the walls above the tiers.</p>
+    <p><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> walk · mouse to look · <kbd>Shift</kbd> faster · <kbd>click</kbd> a picture to look closer<br>
+       <kbd>0</kbd> rotunda · <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> jump to a room · <kbd>Esc</kbd> pause</p>
+    <p class="go">Click to enter →</p>
+  </div>
+</div>
+<div id="detail" class="hidden"><figure><img id="detail-img" alt=""><figcaption id="detail-cap"></figcaption></figure></div>
+<script type="module" src="./main.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.env
+.env.*
+.venv/
+*.db
+skills/creative-direction-boards/template/img/*
+!skills/creative-direction-boards/template/img/.gitkeep
