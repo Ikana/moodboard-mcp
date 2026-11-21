@@ -22,6 +22,9 @@
   #overlay .go { margin-top: 20px; font-weight: 500; }
   #crosshair { position: fixed; left: 50%; top: 50%; width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; border-radius: 50%;
     background: rgba(20,20,20,.6); box-shadow: 0 0 0 2px rgba(255,255,255,.6); pointer-events: none; }
+  #flash { position: fixed; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
+  #flash.go { animation: flash .5s ease-out; }
+  @keyframes flash { from { opacity: .85; } to { opacity: 0; } }
   #where { position: fixed; top: 16px; left: 16px; font: 500 11px "IBM Plex Mono", monospace; letter-spacing: .14em;
     background: rgba(239,235,226,.85); padding: 6px 10px; pointer-events: none; }
   #detail { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(12,13,16,.7); padding: 16px; }
@@ -34,12 +37,13 @@
 <body>
 <div id="app"></div>
 <div id="crosshair"></div>
+<div id="flash"></div>
 <div id="where">ROTUNDA</div>
 <div id="overlay" class="hidden">
   <div class="card">
     <h1>The process rotunda</h1>
-    <p>A small round room, like the Orangerie's rotonde, with three doorways. Each opens onto an oval auditorium for one column of the moodboard: <b>A · Engineering</b>, <b>B · Clarity</b> and <b>C · Flow</b>. Its idea of the creative process stands in the middle, and its board hangs round the walls above the tiers.</p>
-    <p><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> walk · mouse to look · <kbd>Shift</kbd> faster · <kbd>click</kbd> a picture to look closer<br>
+    <p>A small round room, like the Orangerie's rotonde, with three doorways. Each opens onto an oval auditorium for one column of the moodboard: <b>A · Engineering</b>, <b>B · Clarity</b> and <b>C · Flow</b>. Its idea of the creative process stands in the middle, and its board hangs round the walls at eye level.</p>
+    <p><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> walk · mouse to look · <kbd>Shift</kbd> faster · <kbd>click</kbd> a picture to look closer · <kbd>Space</kbd> teleport to where you're pointing<br>
        <kbd>H</kbd> holo visor on/off · <kbd>0</kbd> rotunda · <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> jump to a room · <kbd>Esc</kbd> pause</p>
     <p class="go">Click to enter →</p>
   </div>

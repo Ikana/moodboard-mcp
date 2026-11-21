@@ -27,6 +27,7 @@ scene.add(sun);
 
 const texLoader = new THREE.TextureLoader();
 const clickable = [];
+const floors = [], walls = [];   // teleport targets
 
 // ---------------------------------------------------------------- plan
 // Rotunda at the origin; three passages; three 2:1 ovals laid out radially.
@@ -120,14 +121,14 @@ const floorMat = new THREE.MeshStandardMaterial({ color: "#cfc7b6", roughness: 0
 {
   const floor = new THREE.Mesh(new THREE.CircleGeometry(R, 96), floorMat);
   floor.rotation.x = -Math.PI / 2;
-  scene.add(floor);
+  scene.add(floor); floors.push(floor);
   // wall with three gaps
   const gap = Math.asin(DOOR / R);
   ROOMS.forEach((r, i) => {
     const a0 = r.angle + gap, a1 = ROOMS[(i + 1) % 3].angle - gap + (i === 2 ? Math.PI * 2 : 0);
     const pts = [];
     for (let k = 0; k <= 60; k++) { const a = a0 + (a1 - a0) * k / 60; pts.push([R * Math.cos(a), R * Math.sin(a)]); }
-    scene.add(wallStrip(pts, H_ROT, stone));
+    const w = wallStrip(pts, H_ROT, stone); scene.add(w); walls.push(w);
   });
   // lintels over the doorways, with each room's name
   ROOMS.forEach(r => {
@@ -177,7 +178,7 @@ function buildRooms() { ROOMS.forEach(r => {
   const wallMat = new THREE.MeshStandardMaterial({ color: wallCol, roughness: 0.95, side: THREE.DoubleSide });
   const fl = new THREE.Mesh(new THREE.CircleGeometry(1, 128), new THREE.MeshStandardMaterial({ color: floorCol, roughness: 0.9 }));
   fl.scale.set(A_AX, B_AX, 1); fl.rotation.x = -Math.PI / 2; fl.position.y = 0.004;
-  g.add(fl);
+  g.add(fl); floors.push(fl);
 
   // oval wall with the door at t = pi
   const gapT = Math.asin(DOOR / B_AX);
@@ -186,7 +187,7 @@ function buildRooms() { ROOMS.forEach(r => {
     const t = -Math.PI + gapT + (2 * Math.PI - 2 * gapT) * k / 200;
     pts.push([A_AX * Math.cos(t), B_AX * Math.sin(t)]);
   }
-  g.add(wallStrip(pts, H_OVAL, wallMat));
+  { const w = wallStrip(pts, H_OVAL, wallMat); g.add(w); walls.push(w); }
   // lintel over the door on the inside
   const xDoor = -A_AX * Math.cos(gapT);
   const lin = new THREE.Mesh(new THREE.PlaneGeometry(DOOR * 2, H_OVAL - 3.4), wallMat);
@@ -198,23 +199,7 @@ function buildRooms() { ROOMS.forEach(r => {
   sky.scale.set(A_AX, B_AX, 1); sky.rotation.x = Math.PI / 2; sky.position.y = H_OVAL;
   g.add(sky);
 
-  // stepped tiers round the wall, with an aisle at the door
-  const tierMat = new THREE.MeshStandardMaterial({ color: dark ? (r.key === "a" ? "#2d2921" : "#1f2229") : "#e3ddd1", roughness: 0.9 });
-  const edgeMat = new THREE.LineBasicMaterial({ color: dark ? "#5a554b" : "#b8b0a0" });
-  const aisle = 0.2;
-  [[0.70, 0.80, 0.38], [0.80, 0.90, 0.76], [0.90, 0.995, 1.14]].forEach(([s0, s1, hgt]) => {
-    const sh = new THREE.Shape();
-    sh.absellipse(0, 0, A_AX * s1, B_AX * s1, -Math.PI + aisle, Math.PI - aisle, false);
-    sh.absellipse(0, 0, A_AX * s0, B_AX * s0, Math.PI - aisle, -Math.PI + aisle, true);
-    const geo = new THREE.ExtrudeGeometry(sh, { depth: hgt, bevelEnabled: false, curveSegments: 120 });
-    geo.rotateX(-Math.PI / 2);
-    const m = new THREE.Mesh(geo, tierMat);
-    g.add(m);
-    const e = new THREE.LineSegments(new THREE.EdgesGeometry(geo, 30), edgeMat);
-    g.add(e);
-  });
-
-  // the board round the wall, above the tiers
+  // the board round the wall, at eye level
   const imgs = B.images;
   const linkOf = {};
   B.stations.forEach(s => linkOf[s.img] = s.n);
@@ -229,14 +214,14 @@ function buildRooms() { ROOMS.forEach(r => {
       let w = 2.3, h = w / asp;
       if (h > 2.2) { h = 2.2; w = h * asp; }
       const pic = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ map: tex, toneMapped: false }));
-      pic.position.set(x, 3.15, z);
+      pic.position.set(x, 1.75, z);
       pic.rotation.y = Math.atan2(-nx / nl, -nz / nl);
       pic.userData = { src: `../img/${im.f}`, title: im.t, room: B.key, n: linkOf[im.id] };
       g.add(pic);
       clickable.push(pic);
       if (linkOf[im.id]) {
         const lb = label(numLabel(linkOf[im.id]), dark ? th.fg : "#16171b", { size: 0.2 });
-        lb.position.set(x - (nx / nl) * 0.05, 3.15 + h / 2 + 0.2, z - (nz / nl) * 0.05);
+        lb.position.set(x - (nx / nl) * 0.05, 1.75 + h / 2 + 0.2, z - (nz / nl) * 0.05);
         lb.center.set(0.5, 0.5);
         g.add(lb);
       }
@@ -447,8 +432,7 @@ function walkable(x, z) {
     const s = x * r.u.x + z * r.u.z, d = x * r.v.x + z * r.v.z;
     if (s > R - 1.5 && s < R + PASS + 1 && Math.abs(d) < DOOR - 0.35) return true;
     const lx = s - (R + PASS + A_AX);
-    if ((lx / (A_AX * 0.68)) ** 2 + (d / (B_AX * 0.68)) ** 2 < 1) return true;
-    if (lx < 0 && Math.abs(d) < A_AX * 0.2 * 0 + 1.1 && (lx / (A_AX * 0.99)) ** 2 + (d / B_AX) ** 2 < 1) return true;
+    if ((lx / (A_AX - 0.55)) ** 2 + (d / (B_AX - 0.55)) ** 2 < 1) return true;
   }
   return false;
 }
@@ -480,6 +464,36 @@ renderer.domElement.addEventListener("click", () => {
 });
 detail.addEventListener("click", () => { detail.classList.add("hidden"); controls.lock(); });
 
+
+// ---------------------------------------------------------------- teleport
+// Space jumps to where you're pointing: the floor spot, or about 1.2 m back from a wall.
+const marker = new THREE.Mesh(new THREE.RingGeometry(0.22, 0.27, 48), new THREE.MeshBasicMaterial({ color: "#ffffff", transparent: true, opacity: 0.7, depthWrite: false }));
+marker.rotation.x = -Math.PI / 2; marker.visible = false; scene.add(marker);
+const flash = document.getElementById("flash");
+function teleportTarget() {
+  ray.setFromCamera(new THREE.Vector2(0, 0), camera);
+  ray.far = 40;
+  const hit = ray.intersectObjects([...floors, ...walls, ...clickable], false)[0];
+  if (!hit) return null;
+  let p;
+  if (floors.includes(hit.object)) p = hit.point.clone();
+  else {
+    const back = ray.ray.direction.clone().setY(0).normalize().multiplyScalar(-1.2);
+    p = hit.point.clone().add(back);
+  }
+  p.y = 0;
+  for (let k = 0; k < 12 && !walkable(p.x, p.z); k++) p.lerp(camera.position.clone().setY(0), 0.25);
+  return walkable(p.x, p.z) ? p : null;
+}
+function teleport() {
+  const p = teleportTarget();
+  if (!p) return;
+  camera.position.set(p.x, EYE, p.z);
+  if (flash) { flash.classList.remove("go"); void flash.offsetWidth; flash.classList.add("go"); }
+  window.__hudSnap && window.__hudSnap();
+}
+addEventListener("keydown", e => { if (e.code === "Space" && controls.isLocked) { e.preventDefault(); teleport(); } });
+
 // ---------------------------------------------------------------- loop
 const clock = new THREE.Clock();
 const fwd = new THREE.Vector3(), side = new THREE.Vector3();
@@ -505,6 +519,11 @@ function frame() {
     }
   }
   if (embed) embedCamera(embed, t);
+  if (controls.isLocked) {
+    const tp = teleportTarget();
+    marker.visible = !!tp;
+    if (tp) { marker.position.set(tp.x, 0.02, tp.z); marker.scale.setScalar(1 + 0.08 * Math.sin(t * 5)); }
+  } else marker.visible = false;
   animators.forEach(f => f(dt, t));
   const hudOff = embed || params.get("hud") === "0";
   hud.setRoom(hudOff ? null : roomKeyAt(camera.position.x, camera.position.z), t);
@@ -529,5 +548,5 @@ function embedCamera(k, t) {
   camera.lookAt(g.localToWorld(_l.clone()));
 }
 goto(shot || "rotunda");
-window.__rooms = { camera, scene, renderer, goto, render: () => renderer.render(scene, camera) };
+window.__rooms = { camera, scene, renderer, goto, teleport, teleportTarget, render: () => renderer.render(scene, camera) };
 frame();

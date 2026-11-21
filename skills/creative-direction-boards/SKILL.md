@@ -53,7 +53,7 @@ Start from [template/](template/). It is three directions keyed `a`, `b` and `c`
 4. Serve with `python3 <dir>/rooms/serve.py`, which serves on port 5191. These are the pages:
    - `/collage.html`: all three mockups on one screen.
    - `/collage.html?k=a`: one mockup full screen.
-   - `/rooms/`: a walkable Orangerie-style rotunda, with doorways into three oval auditoria.
+   - `/rooms/`: a walkable Orangerie-style rotunda, with doorways into three single-level oval rooms (Space teleports to the floor spot or wall you point at).
    - `/rooms/?embed=a`: the framed camera move used inside a mockup.
    - Inside a room, `rooms/hud.js` floats that board's collage round the view as a holographic visor that trails the camera within a clamped lag (H toggles it, `?hud=0` turns it off).
 5. Screenshot each page, look at it, fix it, then open it in the person's browser.
