@@ -1,14 +1,14 @@
 ---
 name: creative-direction-boards
-description: Turn a person's keyword columns into moodboards and then into side-by-side creative directions, each a one-screen board with a seeded centre piece (2D or a walkable 3D room) framed by a collage of its references. Use for "moodboards from my keywords", "show me directions", "visualise the creative process", or "mood board mockups to choose a direction".
+description: Turn a person's keyword columns into moodboards, then design one creative direction per board with the Lenny's "AI designer" method (seed strings, design-critic subagent loop, deliver pass), and lay the directions out as one-screen mockups with a 2D or walkable 3D centre piece framed by a collage of references. Use for "moodboards from my keywords", "show me directions", "the Lenny approach", "visualise the creative process", or "mood board mockups to choose a direction".
 ---
 
 # Creative direction boards
 
-Three stages, each ending on something the person can see:
+The moodboard MCP and the Lenny's design method are one pipeline. The boards are the taste baseline the method designs against, and the method turns each board into a direction. Run all three stages, and show the person the result of each one:
 
 1. **Boards**: one moodboard per keyword column, built with the `moodboard` MCP.
-2. **Directions**: for each board, a seeded centre piece refined in a critic loop.
+2. **Directions**: the Lenny's method (Discover → Define → Deliver) applied to each board: a seeded centre piece, a critic loop that uses the board as its baseline, and a deliver pass.
 3. **Mockups**: every direction on one screen, with the centre piece in the middle and the board's images packed round the edges, all three side by side.
 
 Show the person the result of each stage before going on. They usually redirect after the first or second.
@@ -33,9 +33,9 @@ Known MCP quirks, and the workaround for each:
 - `openverse` returns nothing when combined with other sources. Call it alone with `sources: ["openverse"]`.
 - Are.na captions arrive as filenames. Write real captions when you tag.
 
-## 2. Directions
+## 2. Directions (the Lenny's method)
 
-Follow [references/design-loop.md](references/design-loop.md):
+Read [references/design-loop.md](references/design-loop.md) before building anything, and follow every stage of it for each board:
 
 - Roll a fresh seed per direction and read a geometry out of it.
 - Build the centre piece and run the critic subagent loop for two rounds.

@@ -109,7 +109,7 @@ source page before using one in published work.
 [`skills/creative-direction-boards`](skills/creative-direction-boards/SKILL.md) is an agent skill that uses this server end to end:
 
 - It turns keyword columns into moodboards.
-- It builds a seeded centre piece for each direction and refines it with a design-critic subagent loop.
+- It designs each direction with the method from Lenny's Newsletter, "How to turn your AI into a world-class designer": a seed string for variety, a design-critic subagent loop judged against the board, and a pass that cuts AI tells.
 - It lays every direction out on one screen as a mood-board mockup: the centre piece in the middle and a collage of references round the edges. A walkable 3D version is included, an Orangerie-style rotunda that opens onto oval auditoria.
 
 To install it for Claude Code, copy or symlink the folder into `~/.claude/skills/`:
