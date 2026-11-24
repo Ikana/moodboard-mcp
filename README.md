@@ -112,6 +112,8 @@ source page before using one in published work.
 - It designs each direction with the method from Lenny's Newsletter, "How to turn your AI into a world-class designer": a seed string for variety, a design-critic subagent loop judged against the board, and a pass that cuts AI tells.
 - It lays every direction out on one screen as a mood-board mockup: the centre piece in the middle and a collage of references round the edges. A walkable 3D version is included, an Orangerie-style rotunda that opens onto oval auditoria.
 
+The template ships without images. `scripts/export_boards.py` copies a board's images out of your local library.
+
 ## Skill: creative process
 
 [`skills/creative-process`](skills/creative-process/SKILL.md) is the front door. It starts from your own idea and runs four stages: freeform, three columns of three keywords, seeded randomness to explore wide, and artifacts. The last two stages hand off to the creative direction boards skill.
@@ -122,7 +124,5 @@ To install both for Claude Code, symlink the folders into `~/.claude/skills/` (t
 ln -s "$PWD/skills/creative-process" ~/.claude/skills/creative-process
 ln -s "$PWD/skills/creative-direction-boards" ~/.claude/skills/creative-direction-boards
 ```
-
-The template ships without images. `scripts/export_boards.py` copies a board's images out of your local library.
 
 No API keys live in this repo. They come from the MCP config's `env` block.
