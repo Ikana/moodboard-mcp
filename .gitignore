@@ -6,3 +6,6 @@ __pycache__/
 *.db
 skills/creative-direction-boards/template/img/*
 !skills/creative-direction-boards/template/img/.gitkeep
+node_modules/
+skills/creative-direction-boards/template/boards.json
+skills/creative-direction-boards/template/dist/
