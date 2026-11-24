@@ -45,19 +45,20 @@ The centre piece shows the process as one figure with labelled stations, grouped
 
 ## 3. Mockups
 
-Start from [template/](template/). It is three directions keyed `a`, `b` and `c`:
+The mockups and the walkable rooms are a finished template in [template/](template/). Don't rebuild any of the mechanics: the rotunda, the oval rooms, the pictures on the walls, the holographic visor, walking, teleport and the embed camera all come from one data file. For each direction you write data and one centre piece, nothing else.
 
-1. Copy the boards in. `python3 scripts/export_boards.py --home ~/Moodboards --out <dir> --board "<board name>=a" --board "...=b" --board "...=c"` creates `<dir>` from the template, copies the images, and writes `sizes.js` and `rooms/boards.js`.
-2. Fill in `rooms/boards.js` for each key: `headline`, `caption`, `seed`, `theme` (palette, with `c1`/`c2`/`c3` for the three phases), `figure`, and `stations` (station number → image id). See `rooms/boards.example.js`, which has the three finished directions from the first run.
-3. Centre pieces live in `rooms/main.js` under `CENTRE`. The ones there are `exploded` (a stack of parts on one axis), `aperture` (nested frames you walk through toward one opening) and `eight` (a figure-eight tube). Write a new function for each new seed reading rather than reusing these.
-4. Serve with `python3 <dir>/rooms/serve.py`, which serves on port 5191. These are the pages:
-   - `/collage.html`: all three mockups on one screen.
-   - `/collage.html?k=a`: one mockup full screen.
-   - `/rooms/`: a walkable Orangerie-style rotunda, with doorways into three single-level oval rooms (Space teleports to the floor spot or wall you point at).
-   - `/rooms/?embed=a`: the framed camera move used inside a mockup.
-   - Inside a room, `rooms/hud.js` floats that board's collage round the view as a holographic visor that trails the camera within a clamped lag (H toggles it, `?hud=0` turns it off).
-5. Screenshot each page, look at it, fix it, then open it in the person's browser.
+**Getting the template.** If this skill's folder isn't on disk (a cloud session, or a skill installed without its files), fetch it: `git clone --depth 1 https://github.com/Ikana/moodboard-mcp` and work from `moodboard-mcp/skills/creative-direction-boards/`. Everything runs on Node 22.18 or later with no install step. Run `npm install` in the working folder only to type-check.
 
-[template/flat/](template/flat/) holds the 2D version of a direction page, which is quicker to iterate in the critic loop before moving to 3D.
+1. **Make a working folder with the images.** With the moodboard MCP: `node scripts/export-boards.ts --home ~/Moodboards --out <dir> --board "<board name>=a" --board "...=b" --board "...=c"`. It copies the template to `<dir>`, copies each board's images into `<dir>/img/` and writes `<dir>/boards.json`. Re-running it refreshes the images and keeps your edits. Without the MCP, copy `template/` to `<dir>`, put the images in `<dir>/img/`, and write `boards.json` by hand from `boards.example.json`.
+2. **Fill in `boards.json`.** `process` is the person's steps in order, each with a `name` and a `phase` (`intent`, `discover`, `define` or `deliver`). Use the steps they chose; the export defaults to the nine spiral-worksheet steps. Then, per board: `column`, `headline`, `caption`, `seed`, `reading` (one sentence on what the seed was read as), `figure`, `keywords` (`n` = priority, `word`), `theme`, `stations` (step number → the image that inspired it), and `flat` for the 2D draft. Leave `images` as the export wrote them. In `theme`, `mode` is `dark` or `light` and fills in the other colours; set `c1`/`c2`/`c3` (discover, define, deliver), `wall`, `floor`, `sky`, `lamp` and `holo` (the visor tint) to match the board. [template/boards.example.json](template/boards.example.json) has the three finished directions from the first run. A bad file shows a clear error on the page naming the field.
+3. **Write the centre piece.** Add one entry to `CENTRES` in `rooms/centre.ts` (3D) and the same name to `FIGURES` in `flat/figures.ts` (2D), then set the board's `figure` to that name. The header comment in each file is the contract: what you draw into, the room's coordinates, and how to colour and label each step. Copy `plinth` to start. `exploded`, `aperture` and `eight` are the finished examples; write a new one for each new seed reading rather than reusing them. These two files are the only code you edit.
+4. **Check and serve.** `npx tsc -p <dir>` must pass. Then `node <dir>/serve.ts` serves on port 5191 and compiles the TypeScript as it goes:
+   - `/collage.html`: every mockup on one screen. `/collage.html?k=a` shows one full screen.
+   - `/flat/?k=a`: the 2D draft, quicker to iterate in the critic loop before moving to 3D.
+   - `/rooms/`: a walkable Orangerie-style rotunda with a doorway into each board's oval room. Keys: WASD walk, Space teleports to where you point, H toggles the visor, 0 to 9 jump between rooms.
+   - `/rooms/?embed=a`: the framed camera move used inside a mockup (from your centre piece's `shot`). `?shot=a` starts in room `a`, and `?hud=0` turns the visor off.
+5. **Look at it.** Screenshot each page, look at it, fix it, then open it in the person's browser. In a cloud session, `node <dir>/build.ts` writes a static `dist/` with plain JavaScript, which any static server or Playwright can open.
+
+Write all code in TypeScript, never Python or plain JavaScript, and follow [references/typescript-style.md](references/typescript-style.md).
 
 Publish no images: the boards are other people's work, fine for a private moodboard. Each image's notes hold its source and licence.

@@ -112,7 +112,7 @@ source page before using one in published work.
 - It designs each direction with the method from Lenny's Newsletter, "How to turn your AI into a world-class designer": a seed string for variety, a design-critic subagent loop judged against the board, and a pass that cuts AI tells.
 - It lays every direction out on one screen as a mood-board mockup: the centre piece in the middle and a collage of references round the edges. A walkable 3D version is included, an Orangerie-style rotunda that opens onto oval auditoria.
 
-The template ships without images. `scripts/export_boards.py` copies a board's images out of your local library.
+The template ships without images. `node scripts/export-boards.ts` copies a board's images out of your local library and writes the `boards.json` that drives every page. The template is TypeScript and runs on Node 22.18 or later with no build step: `node serve.ts` serves it, and `node build.ts` writes a static copy. For a new direction you edit only `boards.json` and the centre piece in `rooms/centre.ts` (3D) and `flat/figures.ts` (2D).
 
 ## Skill: creative process
 

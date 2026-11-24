@@ -1,0 +1,606 @@
+{
+ "title": "The creative process",
+ "process": [
+  {
+   "name": "Seed randomness",
+   "phase": "discover"
+  },
+  {
+   "name": "Ambitious prompts",
+   "phase": "discover"
+  },
+  {
+   "name": "Outside critic",
+   "phase": "define"
+  },
+  {
+   "name": "Generate images",
+   "phase": "define"
+  },
+  {
+   "name": "Add motion",
+   "phase": "define"
+  },
+  {
+   "name": "Cut the excess",
+   "phase": "deliver"
+  },
+  {
+   "name": "Remove AI tells",
+   "phase": "deliver"
+  },
+  {
+   "name": "Rewrite by hand",
+   "phase": "deliver"
+  }
+ ],
+ "boards": [
+  {
+   "slug": "a",
+   "column": "Engineering",
+   "headline": "Every part, then the machine.",
+   "caption": "Discover is the wide, rough base. Define machines each part to fit one axis. Deliver is the small exact piece on top, and the finished object sits beside it.",
+   "seed": "nkWh4Ez4X1TyGjd9y2HZiTF6M1GBp1dNwujkeEK2",
+   "reading": "“X1” gave the single axis, “4Ez4X” the exploded view.",
+   "figure": "exploded",
+   "theme": {
+    "mode": "dark",
+    "wall": "#1a1813",
+    "floor": "#24211b",
+    "sky": "#2b2a27",
+    "lamp": "#ffd9a0",
+    "lampPower": 30,
+    "holo": "#e8b866",
+    "ink": "#0e0d0b",
+    "ink2": "#16140f",
+    "fg": "#e6dccb",
+    "muted": "#7a7266",
+    "hair": "#2a2620",
+    "c1": "#e6dccb",
+    "c2": "#c9a24a",
+    "c3": "#c8673a",
+    "imgFilter": "sepia(.35) grayscale(.6) contrast(1.1) brightness(.42)",
+    "invFilter": "invert(1) sepia(.35) grayscale(.6) contrast(1.1) brightness(.42)"
+   },
+   "keywords": [
+    {
+     "n": 3,
+     "word": "Inspiring"
+    },
+    {
+     "n": 6,
+     "word": "Engineering inspired"
+    },
+    {
+     "n": 9,
+     "word": "Rich"
+    }
+   ],
+   "images": [
+    {
+     "id": "ba66473210",
+     "f": "ba66473210.jpg",
+     "t": "Gabriel Dawe, Plexus",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "1a5834b21e",
+     "f": "1a5834b21e.jpg",
+     "t": "Brass orrery",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "d3927457ce",
+     "f": "d3927457ce.jpg",
+     "t": "Twine installation",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "d4cc4cb369",
+     "f": "d4cc4cb369.jpg",
+     "t": "Gabriel Dawe, Plexus no. 49",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "564defe17b",
+     "f": "564defe17b.jpg",
+     "t": "Arcs built on a grid",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "2577964728",
+     "f": "2577964728.jpg",
+     "t": "Celestial sphere diagram",
+     "inv": true,
+     "ar": 1
+    },
+    {
+     "id": "bdb7fa8489",
+     "f": "bdb7fa8489.jpg",
+     "t": "Exploded carburettor",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "ad1b7c7e46",
+     "f": "ad1b7c7e46.jpg",
+     "t": "Camera tube schematic",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "92b9c94156",
+     "f": "92b9c94156.jpg",
+     "t": "Engraved mechanics plate",
+     "inv": true,
+     "ar": 1
+    },
+    {
+     "id": "ae5e7added",
+     "f": "ae5e7added.jpg",
+     "t": "Patent figure, exploded",
+     "inv": true,
+     "ar": 1
+    },
+    {
+     "id": "e1c92e54f5",
+     "f": "e1c92e54f5.jpg",
+     "t": "Pump cutaway",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "b22a7622e2",
+     "f": "b22a7622e2.webp",
+     "t": "Piranesi, Carceri VII",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "6522d65a46",
+     "f": "6522d65a46.webp",
+     "t": "Piranesi, The Gothic Arch",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "a66f86a97b",
+     "f": "a66f86a97b.jpg",
+     "t": "Steam engine cross-section, c.1760",
+     "inv": true,
+     "ar": 1
+    },
+    {
+     "id": "24451a87ed",
+     "f": "24451a87ed.jpg",
+     "t": "Machine cutaway",
+     "inv": false,
+     "ar": 1
+    }
+   ],
+   "stations": [
+    {
+     "n": 1,
+     "img": "564defe17b"
+    },
+    {
+     "n": 2,
+     "img": "b22a7622e2"
+    },
+    {
+     "n": 3,
+     "img": "92b9c94156"
+    },
+    {
+     "n": 4,
+     "img": "d4cc4cb369"
+    },
+    {
+     "n": 5,
+     "img": "1a5834b21e"
+    },
+    {
+     "n": 6,
+     "img": "bdb7fa8489"
+    },
+    {
+     "n": 7,
+     "img": "ad1b7c7e46"
+    },
+    {
+     "n": 8,
+     "img": "a66f86a97b"
+    }
+   ],
+   "flat": {
+    "figno": "FIG. A — THE CREATIVE PROCESS, ENGINEERED",
+    "textOffset": 1,
+    "textPlates": [
+     "<strong>Column A<br>Engineering</strong><span>Built, not decorated.</span>",
+     "<span><span class='k'>3</span> Inspiring<br><span class='k'>6</span> Engineering inspired<br><span class='k'>9</span> Rich</span><span>Priority, 1 = most</span>",
+     "<span>Seed<br><span class='k'>nkWh4Ez4X1TyGjd9</span></span><span>“X1” gave the single axis, “4Ez4X” the exploded view. Hover a part or a plate to link them.</span>"
+    ],
+    "style": {
+     "spreads": [
+      -0.3,
+      -0.2,
+      -0.1,
+      0.1,
+      0.2,
+      0.3
+     ],
+     "strandOpacity": 0.45,
+     "strandDash": "3 4",
+     "w": 1.3,
+     "flow": false
+    },
+    "labSize": "15px",
+    "phaseSize": "13px"
+   }
+  },
+  {
+   "slug": "b",
+   "column": "Clarity",
+   "headline": "Many frames. One opening.",
+   "caption": "Discover tilts and drifts across wide frames. Define brings them onto one centre. Deliver is the single opening you look through at the end.",
+   "seed": "8RcWQQj4tctPeK8xMSVgghvQzrYF5F0DIxze78lU",
+   "reading": "The 8s and the QQs read as openings, “F0” as focus at zero.",
+   "figure": "aperture",
+   "theme": {
+    "mode": "light",
+    "wall": "#ece8df",
+    "floor": "#d8d1c2",
+    "sky": "#fbf8f1",
+    "lamp": "#ffffff",
+    "lampPower": 12,
+    "holo": "#1f3c9e",
+    "ink": "#ece8df",
+    "ink2": "#e2ddd2",
+    "fg": "#16171b",
+    "muted": "#8a857b",
+    "hair": "#d2ccc0",
+    "c1": "#2340a0",
+    "c2": "#16171b",
+    "c3": "#e2531f",
+    "imgFilter": "saturate(.55) contrast(.95) brightness(1.02)",
+    "invFilter": "saturate(.55)"
+   },
+   "keywords": [
+    {
+     "n": 2,
+     "word": "Awe"
+    },
+    {
+     "n": 5,
+     "word": "Clear typography"
+    },
+    {
+     "n": 7,
+     "word": "Harmonious colours"
+    }
+   ],
+   "images": [
+    {
+     "id": "1f6bdd1144",
+     "f": "1f6bdd1144.jpg",
+     "t": "Turrell, Roden Crater",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "783fdaba90",
+     "f": "783fdaba90.jpg",
+     "t": "Turrell, Skyspace at ARoS",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "fde3036cea",
+     "f": "fde3036cea.jpg",
+     "t": "Ryoji Ikeda, test pattern",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "88099bb3cd",
+     "f": "88099bb3cd.jpg",
+     "t": "Ryoji Ikeda, test pattern n°15",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "933dbd811e",
+     "f": "933dbd811e.jpg",
+     "t": "Turrell, The Color Inside",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "1305f90839",
+     "f": "1305f90839.png",
+     "t": "Apollo trajectory poster",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "0e6e28300e",
+     "f": "0e6e28300e.jpg",
+     "t": "Hilma af Klint, The Ten Largest",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "5b02ca36aa",
+     "f": "5b02ca36aa.jpg",
+     "t": "Wim Crouwel, Vormgevers",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "501d1d0f27",
+     "f": "501d1d0f27.jpg",
+     "t": "Wim Crouwel, New Alphabet",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "470dcaed5f",
+     "f": "470dcaed5f.png",
+     "t": "Tokyo arrival-time map",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "fabb8b1548",
+     "f": "fabb8b1548.jpg",
+     "t": "Wim Crouwel, Etienne Martin",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "e3430d1060",
+     "f": "e3430d1060.jpg",
+     "t": "After Albers, Homage to the Square",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "b2127aec50",
+     "f": "b2127aec50.jpg",
+     "t": "Albers, Homage to the Square, 1966",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "3369d7c218",
+     "f": "3369d7c218.jpg",
+     "t": "Hilma af Klint, No. 3 Youth",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "741b977779",
+     "f": "741b977779.png",
+     "t": "Immigration as tree rings",
+     "inv": false,
+     "ar": 1
+    }
+   ],
+   "stations": [
+    {
+     "n": 1,
+     "img": "3369d7c218"
+    },
+    {
+     "n": 2,
+     "img": "fde3036cea"
+    },
+    {
+     "n": 3,
+     "img": "470dcaed5f"
+    },
+    {
+     "n": 4,
+     "img": "741b977779"
+    },
+    {
+     "n": 5,
+     "img": "1305f90839"
+    },
+    {
+     "n": 6,
+     "img": "783fdaba90"
+    },
+    {
+     "n": 7,
+     "img": "5b02ca36aa"
+    },
+    {
+     "n": 8,
+     "img": "fabb8b1548"
+    }
+   ]
+  },
+  {
+   "slug": "c",
+   "column": "Flow",
+   "headline": "Wide, then through, then in.",
+   "caption": "Discover goes far on many lines. Define is where they cross and become one. Deliver tightens until only what matters is left.",
+   "seed": "KQZ69CCDpBhXrBjZrBsQPN5a6NNWowoAEQI0YejY",
+   "reading": "The 6 and the 9 became a figure-eight.",
+   "figure": "eight",
+   "theme": {
+    "mode": "dark",
+    "wall": "#121419",
+    "floor": "#191b21",
+    "sky": "#2b2a27",
+    "lamp": "#bcd7ff",
+    "lampPower": 30,
+    "holo": "#6cc3ff",
+    "ink": "#0b0c0f",
+    "ink2": "#111317",
+    "fg": "#e9e4d8",
+    "muted": "#6f6c66",
+    "hair": "#24262b",
+    "c1": "#5aa7d8",
+    "c2": "#e9e4d8",
+    "c3": "#e0562a",
+    "imgFilter": "grayscale(1) contrast(1.1) brightness(.4)",
+    "invFilter": "invert(1) grayscale(1) contrast(1.1) brightness(.4)"
+   },
+   "keywords": [
+    {
+     "n": 1,
+     "word": "Flow"
+    },
+    {
+     "n": 4,
+     "word": "Simple OR complex"
+    },
+    {
+     "n": 8,
+     "word": "Blues & red/orange"
+    }
+   ],
+   "images": [
+    {
+     "id": "46f502f941",
+     "f": "46f502f941.jpg",
+     "t": "earth.nullschool wind map",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "dcb2fbf615",
+     "f": "dcb2fbf615.jpg",
+     "t": "Ensō",
+     "inv": true,
+     "ar": 1
+    },
+    {
+     "id": "c73a0e4c2f",
+     "f": "c73a0e4c2f.jpg",
+     "t": "Streamline weather analysis",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "01742d1fc7",
+     "f": "01742d1fc7.jpg",
+     "t": "Wehinger's score for Ligeti, Artikulation",
+     "inv": true,
+     "ar": 1
+    },
+    {
+     "id": "64b6d52d21",
+     "f": "64b6d52d21.jpg",
+     "t": "Ruth Asawa, looped wire",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "bd50fa7edf",
+     "f": "bd50fa7edf.jpg",
+     "t": "Spiral stepwell",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "132140acc9",
+     "f": "132140acc9.jpg",
+     "t": "Four spirals",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "69f575f082",
+     "f": "69f575f082.png",
+     "t": "Refik Anadol, WDCH Dreams",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "5b1027e3bc",
+     "f": "5b1027e3bc.png",
+     "t": "Territory diagram",
+     "inv": true,
+     "ar": 1
+    },
+    {
+     "id": "e9366c7f19",
+     "f": "e9366c7f19.jpg",
+     "t": "The upward spiral",
+     "inv": true,
+     "ar": 1
+    },
+    {
+     "id": "3511da95d6",
+     "f": "3511da95d6.png",
+     "t": "Streamlines round an airfoil",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "5ff87e4bcb",
+     "f": "5ff87e4bcb.jpg",
+     "t": "Light trails",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "73a367b99f",
+     "f": "73a367b99f.jpg",
+     "t": "Hurricane Irma, infrared",
+     "inv": false,
+     "ar": 1
+    },
+    {
+     "id": "39fd8a0183",
+     "f": "39fd8a0183.jpg",
+     "t": "Blue spiral in the night sky",
+     "inv": false,
+     "ar": 1
+    }
+   ],
+   "stations": [
+    {
+     "n": 1,
+     "img": "dcb2fbf615"
+    },
+    {
+     "n": 2,
+     "img": "69f575f082"
+    },
+    {
+     "n": 3,
+     "img": "132140acc9"
+    },
+    {
+     "n": 4,
+     "img": "46f502f941"
+    },
+    {
+     "n": 5,
+     "img": "5ff87e4bcb"
+    },
+    {
+     "n": 6,
+     "img": "3511da95d6"
+    },
+    {
+     "n": 7,
+     "img": "e9366c7f19"
+    },
+    {
+     "n": 8,
+     "img": "01742d1fc7"
+    }
+   ]
+  }
+ ]
+}

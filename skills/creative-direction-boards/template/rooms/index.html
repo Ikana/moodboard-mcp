@@ -32,7 +32,7 @@
   #detail img { max-width: 100%; max-height: 78vh; display: block; }
   #detail figcaption { color: #e9e4d8; font-size: 12px; margin-top: 10px; letter-spacing: .04em; }
 </style>
-<script type="importmap">{ "imports": { "three": "./vendor/three.module.js" } }</script>
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.js", "three/addons/": "./vendor/addons/" } }</script>
 </head>
 <body>
 <div id="app"></div>
@@ -42,14 +42,13 @@
 <div id="overlay" class="hidden">
   <div class="card">
     <h1>The process rotunda</h1>
-    <p>A small round room, like the Orangerie's rotonde, with three doorways. Each opens onto an oval auditorium for one column of the moodboard: <b>A · Engineering</b>, <b>B · Clarity</b> and <b>C · Flow</b>. Its idea of the creative process stands in the middle, and its board hangs round the walls at eye level.</p>
+    <p>A small round room, like the Orangerie's rotonde, with a doorway for each column of the moodboard: <b id="room-list"></b>. Each opens onto an oval auditorium. Its idea of the creative process stands in the middle, and its board hangs round the walls at eye level.</p>
     <p><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> walk · mouse to look · <kbd>Shift</kbd> faster · <kbd>click</kbd> a picture to look closer · <kbd>Space</kbd> teleport to where you're pointing<br>
-       <kbd>H</kbd> holo visor on/off · <kbd>0</kbd> rotunda · <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> jump to a room · <kbd>Esc</kbd> pause</p>
+       <kbd>H</kbd> holo visor on/off · <kbd>0</kbd> rotunda · <kbd id="jump-keys"></kbd> jump to a room · <kbd>Esc</kbd> pause</p>
     <p class="go">Click to enter →</p>
   </div>
 </div>
 <div id="detail" class="hidden"><figure><img id="detail-img" alt=""><figcaption id="detail-cap"></figcaption></figure></div>
-<script src="../sizes.js"></script>
-<script type="module" src="./main.js"></script>
+<script type="module" src="./main.ts"></script>
 </body>
 </html>
